@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AirPulse+ | Contactless Monitoring Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="app-shell">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-mark">✳</div><div><strong>AirPulse<span>+</span></strong><small>MONITORING STUDIO</small></div></div>
+  <div class="nav-label">WORKSPACE</div>
+  <button class="nav-item active" data-view="dashboard"><span>▦</span> Overview</button>
+  <button class="nav-item" data-view="people"><span>♙</span> People & poses</button>
+  <button class="nav-item" data-view="signals"><span>〰</span> Signal lab</button>
+  <button class="nav-item" data-view="alerts"><span>♢</span> Alert history <b id="alertNavCount">0</b></button>
+  <div class="sidebar-bottom"><div class="demo-box"><span class="pulse-dot"></span><div><b>Demo environment</b><small>Simulated data only</small></div></div><button id="resetBtn" class="reset-btn">↻ Reset demo data</button><div class="sidebar-foot">AIRPULSE+ · ACADEMIC PROTOTYPE<br>v1.0.0</div></div>
+</aside>
+<main class="main">
+<header class="topbar"><div><div class="eyebrow">AIRPULSE+ / <span id="crumb">OVERVIEW</span></div><h1 id="pageTitle">Monitoring overview</h1></div><div class="top-actions"><span class="live-pill"><i></i> DEMO LIVE</span><div class="avatar">AP</div></div></header>
+<div class="notice"><span class="notice-icon">ⓘ</span><div><b>Simulation mode</b><span>All readings, signal traces, confidence scores and alerts are generated for demonstration. This prototype does not measure actual WiFi CSI or provide medical advice.</span></div></div>
+<section id="view-dashboard" class="view active">
+  <div class="section-heading"><div><h2>System at a glance</h2><p>Explore the proposed monitoring workflow using interactive demo scenarios.</p></div><button class="primary-btn" id="quickSim">＋ Run demo scenario</button></div>
+  <div class="metrics-grid">
+    <article class="metric-card"><div class="metric-top"><span>People monitored</span><span class="metric-icon blue">♙</span></div><div class="metric-value" id="metricPeople">4</div><div class="metric-note"><span class="positive">●</span> Demo profiles active</div></article>
+    <article class="metric-card"><div class="metric-top"><span>Average heart rate</span><span class="metric-icon coral">♡</span></div><div class="metric-value"><span id="metricHR">77</span><small> bpm</small></div><div class="metric-note">Simulated sample estimate</div></article>
+    <article class="metric-card"><div class="metric-top"><span>Average breathing</span><span class="metric-icon violet">〰</span></div><div class="metric-value"><span id="metricBR">18</span><small> br/min</small></div><div class="metric-note">Simulated sample estimate</div></article>
+    <article class="metric-card"><div class="metric-top"><span>Open alerts</span><span class="metric-icon amber">♢</span></div><div class="metric-value" id="metricAlerts">0</div><div class="metric-note">Requires demo review</div></article>
+  </div>
+  <div class="content-grid">
+    <article class="panel trend-panel"><div class="panel-head"><div><h3>Vital trend explorer</h3><p>Sample values across recent demo events</p></div><select id="trendPerson" aria-label="Choose person"></select></div><div class="chart-wrap"><canvas id="trendChart"></canvas></div><div class="chart-legend"><span><i class="legend-dot blue-dot"></i> Heart rate (bpm)</span><span><i class="legend-dot purple-dot"></i> Breathing rate (×4 scale)</span></div></article>
+    <article class="panel"><div class="panel-head"><div><h3>Risk distribution</h3><p>Current simulated classifications</p></div></div><div class="risk-chart-wrap"><canvas id="riskChart"></canvas></div><div id="riskLegend" class="risk-legend"></div></article>
+  </div>
+  <article class="panel people-panel"><div class="panel-head"><div><h3>People overview</h3><p>Choose a profile to inspect sample readings and pose scenarios</p></div><button class="text-btn" data-goto="people">View all people ↗</button></div><div id="peopleTable"></div></article>
+  <div class="bottom-grid"><article class="panel"><div class="panel-head"><div><h3>Recent alerts</h3><p>Generated from demo scenarios</p></div><button class="text-btn" data-goto="alerts">View history ↗</button></div><div id="recentAlerts"></div></article><article class="panel architecture"><div class="panel-head"><div><h3>Proposed pipeline</h3><p>Conceptual system architecture</p></div></div><div class="pipeline"><div><b>01</b><span>CSI acquisition</span><small>Future hardware</small></div><i>→</i><div><b>02</b><span>Preprocessing</span><small>Filter & normalize</small></div><i>→</i><div><b>03</b><span>Feature + ML</span><small>Research stage</small></div><i>→</i><div><b>04</b><span>Confidence alerts</span><small>Demo workflow</small></div></div><p class="architecture-note">The live dashboard currently uses simulated inputs; the first three stages are conceptual, not connected to a real CSI stream.</p></article></div>
+</section>
+<section id="view-people" class="view">
+ <div class="section-heading"><div><h2>People & pose scenarios</h2><p>Select a demo profile, change the pose, and generate a simulated scenario.</p></div></div>
+ <div class="people-layout"><article class="panel"><div class="panel-head"><div><h3>Demo profiles</h3><p>Sample people are fictional</p></div></div><div id="profileList" class="profile-list"></div></article>
+ <article class="panel detail-panel"><div class="panel-head"><div><h3 id="detailName">Select a profile</h3><p id="detailMeta">Person detail and scenario controls</p></div><span id="detailRisk" class="risk-badge low">LOW</span></div>
+ <div class="pose-stage"><div id="poseArt" class="pose-art standing"><div class="pose-head"></div><div class="pose-body"></div><div class="pose-arm left"></div><div class="pose-arm right"></div><div class="pose-leg left"></div><div class="pose-leg right"></div></div><div class="pose-caption"><span>POSE PREVIEW</span><b id="poseLabel">Standing</b><small>Illustrative avatar · not sensor-derived</small></div></div>
+ <div class="control-grid"><label>Pose<select id="poseSelect"><option>Standing</option><option>Sitting</option><option>Lying</option><option>Walking</option><option>Fallen</option></select></label><label>Demo scenario<select id="scenarioSelect"><option value="normal">Normal monitoring</option><option value="inactivity">Extended inactivity</option><option value="irregular">Irregular pattern</option><option value="fall">Fall-like event</option></select></label></div>
+ <button id="runScenario" class="primary-btn full">▶ Run selected scenario</button><div id="scenarioResult" class="scenario-result">Choose a scenario to update the simulated values and alert history.</div>
+ <div class="detail-metrics"><div><small>Heart rate</small><b id="detailHR">— <em>bpm</em></b></div><div><small>Breathing</small><b id="detailBR">— <em>br/min</em></b></div><div><small>Confidence</small><b id="detailConfidence">—%</b></div></div>
+ </article></div>
+</section>
+<section id="view-signals" class="view">
+ <div class="section-heading"><div><h2>Signal lab</h2><p>Illustrative signal visualizations to explain the planned CSI processing workflow.</p></div><span class="simulation-tag">SYNTHETIC SIGNAL</span></div>
+ <div class="content-grid"><article class="panel"><div class="panel-head"><div><h3>Channel variation (synthetic)</h3><p>Artificial amplitude trace — not captured from WiFi hardware</p></div><button id="regenSignal" class="small-btn">↻ Regenerate</button></div><div class="chart-wrap tall"><canvas id="signalChart"></canvas></div></article><article class="panel"><div class="panel-head"><div><h3>Conceptual processing stages</h3><p>Illustrative workflow only</p></div></div><div class="stage-list"><div><span>1</span><div><b>Raw CSI packets</b><small>Would require compatible WiFi hardware and a data capture pipeline.</small></div><em>Future</em></div><div><span>2</span><div><b>Denoising & normalization</b><small>Remove outliers, filter noise, align time windows.</small></div><em>Planned</em></div><div><span>3</span><div><b>Feature extraction</b><small>Study amplitude/phase changes and temporal features.</small></div><em>Planned</em></div><div><span>4</span><div><b>Model inference</b><small>Validate against reference measurements before estimating physiology.</small></div><em>Research</em></div><div><span>5</span><div><b>Confidence-aware alert</b><small>Surface uncertainty and require human review.</small></div><em class="stage-demo">Demo</em></div></div></article></div>
+ <article class="panel"><div class="panel-head"><div><h3>Feature preview</h3><p>Generated values used for UI demonstration only</p></div></div><div class="feature-grid"><div><small>Amplitude variation</small><b id="featAmp">0.42</b></div><div><small>Signal-to-noise ratio</small><b id="featSnr">18.6 dB</b></div><div><small>Window stability</small><b id="featStability">91%</b></div><div><small>Model confidence</small><b id="featConfidence">94%</b></div></div></article>
+</section>
+<section id="view-alerts" class="view">
+ <div class="section-heading"><div><h2>Alert history</h2><p>Review and acknowledge alerts generated by simulated scenarios.</p></div><select id="alertFilter"><option value="ALL">All alert levels</option><option>CRITICAL</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option></select></div>
+ <article class="panel"><div id="alertTable"></div></article>
+ <div class="disclaimer-card"><b>Important limitation</b><p>Alert levels are scenario labels, not clinical conclusions. Do not use this academic prototype for diagnosis, emergency response, or real patient monitoring.</p></div>
+</section>
+<footer>AirPulse+ academic prototype <span>•</span> Simulated data only <span>•</span> Not a medical device</footer>
+</main></div>
+<div id="toast" class="toast" role="status"></div>
+<script src="/app.js"></script>
+</body></html>

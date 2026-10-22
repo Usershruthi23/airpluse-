@@ -1,0 +1,176 @@
+{
+  "people": [
+    {
+      "id": "P001",
+      "name": "Alex Morgan",
+      "age": 28,
+      "group": "Adult",
+      "heartRate": 114,
+      "breathingRate": 32,
+      "confidence": 78,
+      "risk": "CRITICAL",
+      "pose": "Fallen",
+      "room": "Room A",
+      "status": "Active"
+    },
+    {
+      "id": "P002",
+      "name": "Maya Chen",
+      "age": 9,
+      "group": "Child",
+      "heartRate": 118,
+      "breathingRate": 30,
+      "confidence": 80,
+      "risk": "HIGH",
+      "pose": "Walking",
+      "room": "Room B",
+      "status": "Active"
+    },
+    {
+      "id": "P003",
+      "name": "Robert Hayes",
+      "age": 68,
+      "group": "Older adult",
+      "heartRate": 68,
+      "breathingRate": 17,
+      "confidence": 86,
+      "risk": "MEDIUM",
+      "pose": "Lying",
+      "room": "Room C",
+      "status": "Active"
+    },
+    {
+      "id": "P004",
+      "name": "Sam Taylor",
+      "age": 42,
+      "group": "Adult",
+      "heartRate": 78,
+      "breathingRate": 18,
+      "confidence": 91,
+      "risk": "LOW",
+      "pose": "Walking",
+      "room": "Room D",
+      "status": "Active"
+    }
+  ],
+  "alerts": [
+    {
+      "id": "AL-236326",
+      "time": "2026-10-22T06:07:16.326Z",
+      "personId": "P002",
+      "personName": "Maya Chen",
+      "level": "HIGH",
+      "title": "Irregular pattern",
+      "detail": "Simulated irregular movement/vital pattern; not a diagnosis. Readings are simulated.",
+      "status": "New"
+    },
+    {
+      "id": "AL-219280",
+      "time": "2026-10-22T06:06:59.280Z",
+      "personId": "P002",
+      "personName": "Maya Chen",
+      "level": "CRITICAL",
+      "title": "Fall-like event",
+      "detail": "Simulated fall-like event for demonstration only. Readings are simulated.",
+      "status": "New"
+    },
+    {
+      "id": "AL-202913",
+      "time": "2026-10-22T06:06:42.912Z",
+      "personId": "P001",
+      "personName": "Alex Morgan",
+      "level": "CRITICAL",
+      "title": "Fall-like event",
+      "detail": "Simulated fall-like event for demonstration only. Readings are simulated.",
+      "status": "New"
+    },
+    {
+      "id": "AL-1042",
+      "time": "2026-10-22T05:53:35.610Z",
+      "personId": "P003",
+      "personName": "Robert Hayes",
+      "level": "MEDIUM",
+      "title": "Unusual inactivity pattern",
+      "detail": "Simulated scenario: extended inactivity detected.",
+      "status": "Acknowledged"
+    },
+    {
+      "id": "AL-1041",
+      "time": "2026-10-22T05:21:35.610Z",
+      "personId": "P004",
+      "personName": "Sam Taylor",
+      "level": "LOW",
+      "title": "Confidence reduced",
+      "detail": "Sample confidence dipped below the preferred threshold.",
+      "status": "Resolved"
+    }
+  ],
+  "history": [
+    {
+      "time": "2026-10-22T06:06:31.778Z",
+      "personId": "P001",
+      "personName": "Alex Morgan",
+      "heartRate": 84,
+      "breathingRate": 15,
+      "confidence": 98,
+      "risk": "LOW",
+      "pose": "Fallen",
+      "scenario": "normal"
+    },
+    {
+      "time": "2026-10-22T06:06:34.805Z",
+      "personId": "P001",
+      "personName": "Alex Morgan",
+      "heartRate": 73,
+      "breathingRate": 13,
+      "confidence": 89,
+      "risk": "LOW",
+      "pose": "Fallen",
+      "scenario": "normal"
+    },
+    {
+      "time": "2026-10-22T06:06:42.912Z",
+      "personId": "P001",
+      "personName": "Alex Morgan",
+      "heartRate": 114,
+      "breathingRate": 32,
+      "confidence": 78,
+      "risk": "CRITICAL",
+      "pose": "Fallen",
+      "scenario": "fall"
+    },
+    {
+      "time": "2026-10-22T06:06:59.280Z",
+      "personId": "P002",
+      "personName": "Maya Chen",
+      "heartRate": 118,
+      "breathingRate": 30,
+      "confidence": 86,
+      "risk": "CRITICAL",
+      "pose": "Sitting",
+      "scenario": "fall"
+    },
+    {
+      "time": "2026-10-22T06:07:04.487Z",
+      "personId": "P002",
+      "personName": "Maya Chen",
+      "heartRate": 85,
+      "breathingRate": 19,
+      "confidence": 89,
+      "risk": "LOW",
+      "pose": "Sitting",
+      "scenario": "normal"
+    },
+    {
+      "time": "2026-10-22T06:07:16.326Z",
+      "personId": "P002",
+      "personName": "Maya Chen",
+      "heartRate": 118,
+      "breathingRate": 30,
+      "confidence": 80,
+      "risk": "HIGH",
+      "pose": "Walking",
+      "scenario": "irregular"
+    }
+  ]
+}
